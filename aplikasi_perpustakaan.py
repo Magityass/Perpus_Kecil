@@ -48,11 +48,13 @@ class AplikasiPerpustakaan:
             print(f"Username atau password salah. Sisa percobaan: {3 - percobaan}")
     
         return False
+    
     def tampilkan_menu(self):
-            print(f"\n=== MENU UTAMA (Petugas: {self.__petugas_aktif.get_nama()}) ===")
-            print("1. Tambah Data Buku")
-            print("2. Tampilkan Semua Buku")
-            print("3. Cari Buku (berdasarkan Kode)")
-            print("4. Perbarui Data Buku")
-            print("5. Hapus Data Buku")
-            print("6. Keluar")
+               print(f"\n=== MENU UTAMA (Petugas: {self.__petugas_aktif.get_nama()}) ===")
+               print("1. Tambah Data Buku")
+               print("2. Tampilkan Semua Buku")
+               print("3. Cari Buku (berdasarkan Kode)")
+               print("4. Perbarui Data Buku")
+               print("5. Hapus Data Buku")
+               print("6. Keluar")
+
