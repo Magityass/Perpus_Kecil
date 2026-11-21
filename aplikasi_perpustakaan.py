@@ -58,3 +58,30 @@ class AplikasiPerpustakaan:
                print("5. Hapus Data Buku")
                print("6. Keluar")
 
+    def menu_tambah(self):
+        print("\n--- TAMBAH DATA BUKU ---")
+        kode = input("Kode Buku    : ").strip()
+        if kode == "":
+            print("Kode buku tidak boleh kosong.")
+            return
+    
+        if self.__manajer.cari_buku(kode) is not None:
+            print(f"Gagal! Buku dengan kode '{kode.upper()}' sudah terdaftar.")
+            return
+    
+        judul = input("Judul Buku   : ").strip()
+        penulis = input("Penulis      : ").strip()
+        penerbit = input("Penerbit     : ").strip()
+    
+        try:
+            tahun = int(input("Tahun Terbit : ").strip())
+            stok = int(input("Jumlah Stok  : ").strip())
+        except ValueError:
+            print("Gagal! Tahun terbit dan stok harus berupa angka.")
+            return
+    
+        buku_baru = Buku(kode, judul, penulis, penerbit, tahun, stok)
+        if self.__manajer.tambah_buku(buku_baru):
+            print("Data buku berhasil ditambahkan dan disimpan.")
+        else:
+            print("Gagal menambahkan data buku.")
