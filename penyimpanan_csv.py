@@ -1,6 +1,7 @@
 from buku import Buku
 from petugas import Petugas
 
+
 class PenyimpananCsv:
     def __init__(self, path_file, fieldnames, key_field, jenis):
         self.__path_file = path_file
@@ -54,3 +55,17 @@ class PenyimpananCsv:
             pass
 
         return data_hasil
+
+    def simpan_semua(self, data):
+        with open(self.__path_file, "w", encoding="utf-8") as file:
+            header = ",".join(self.__fieldnames)
+            file.write(header + "\n")
+
+            for objek in data.values():
+                data_dict = objek.to_dict()
+                baris_list = []
+                for kolom in self.__fieldnames:
+                    baris_list.append(str(data_dict[kolom]))
+
+                baris_teks = ",".join(baris_list)
+                file.write(baris_teks + "\n")
