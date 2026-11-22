@@ -130,3 +130,21 @@ class AplikasiPerpustakaan:
             nomor += 1
 
         print(garis)
+
+def menu_cari(self):
+        print("\n--- CARI DATA BUKU ---")
+        kode = input("Masukkan Kode Buku: ").strip()
+        buku = self.__manajer.cari_buku(kode)
+
+        if buku is None:
+            print(f"Buku dengan kode '{kode.upper()}' tidak ditemukan.")
+        else:
+            garis = "-" * 49
+            print(garis)
+            print(f"| {'Kode Buku':<12} : {buku.get_kode_buku():<30} |")
+            print(f"| {'Judul':<12} : {buku.get_judul():<30} |")
+            print(f"| {'Penulis':<12} : {buku.get_penulis():<30} |")
+            print(f"| {'Penerbit':<12} : {buku.get_penerbit():<30} |")
+            print(f"| {'Tahun Terbit':<12} : {buku.get_tahun_terbit():<30} |")
+            print(f"| {'Stok':<12} : {buku.get_stok():<30} |")
+            print(garis)
