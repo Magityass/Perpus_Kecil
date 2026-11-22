@@ -85,3 +85,48 @@ class AplikasiPerpustakaan:
             print("Data buku berhasil ditambahkan dan disimpan.")
         else:
             print("Gagal menambahkan data buku.")
+
+    def menu_tampilkan_semua(self):
+        print("\n--- DAFTAR KOLEKSI BUKU ---")
+        daftar = self.__manajer.get_semua_buku()
+        if len(daftar) == 0:
+            print("Belum ada data buku tersimpan.")
+            return
+
+        w_no = max(2, len(str(len(daftar))))
+        w_kode = 4
+        w_judul = 5
+        w_penulis = 7
+        w_penerbit = 8
+        w_tahun = 5
+        w_stok = 4
+
+        for buku in daftar:
+            w_kode = max(w_kode, len(buku.get_kode_buku()))
+            w_judul = max(w_judul, len(buku.get_judul()))
+            w_penulis = max(w_penulis, len(buku.get_penulis()))
+            w_penerbit = max(w_penerbit, len(buku.get_penerbit()))
+            w_stok = max(w_stok, len(str(buku.get_stok())))
+
+        header = (
+            f"| {'No':<{w_no}} | {'Kode':<{w_kode}} | {'Judul':<{w_judul}} | "
+            f"{'Penulis':<{w_penulis}} | {'Penerbit':<{w_penerbit}} | "
+            f"{'Tahun':<{w_tahun}} | {'Stok':<{w_stok}} |"
+        )
+        garis = "-" * len(header)
+
+        print(garis)
+        print(header)
+        print(garis)
+
+        nomor = 1
+        for buku in daftar:
+            print(
+                f"| {nomor:<{w_no}} | {buku.get_kode_buku():<{w_kode}} | "
+                f"{buku.get_judul():<{w_judul}} | {buku.get_penulis():<{w_penulis}} | "
+                f"{buku.get_penerbit():<{w_penerbit}} | {buku.get_tahun_terbit():>{w_tahun}} | "
+                f"{buku.get_stok():>{w_stok}} |"
+            )
+            nomor += 1
+
+        print(garis)
