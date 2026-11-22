@@ -26,5 +26,12 @@ class ManajerPerpustakaan:
         buku.perbarui_detail(judul, penulis, penerbit, tahun, stok)
         self.__penyimpanan_buku.simpan_semua(self.__daftar_buku)
         return True
+    def hapus_buku(self, kode_buku):
+        kode = kode_buku.strip().upper()
+        if kode not in self.__daftar_buku:
+            return False
+        del self.__daftar_buku[kode]
+        self.__penyimpanan_buku.simpan_semua(self.__daftar_buku)
+        return True
     def get_semua_buku(self):
         return list(self.__daftar_buku.values())
