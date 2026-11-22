@@ -131,7 +131,7 @@ class AplikasiPerpustakaan:
 
         print(garis)
 
-def menu_cari(self):
+    def menu_cari(self):
         print("\n--- CARI DATA BUKU ---")
         kode = input("Masukkan Kode Buku: ").strip()
         buku = self.__manajer.cari_buku(kode)
@@ -148,3 +148,50 @@ def menu_cari(self):
             print(f"| {'Tahun Terbit':<12} : {buku.get_tahun_terbit():<30} |")
             print(f"| {'Stok':<12} : {buku.get_stok():<30} |")
             print(garis)
+
+    def menu_perbarui(self):
+        print("\n--- PERBARUI DATA BUKU ---")
+        kode = input("Masukkan Kode Buku yang akan diperbarui: ").strip()
+        buku = self.__manajer.cari_buku(kode)
+
+        if buku is None:
+            print(f"Buku dengan kode '{kode.upper()}' tidak ditemukan.")
+            return
+
+        print(
+            f"Data saat ini -> Judul: {buku.get_judul()}, Penulis: {buku.get_penulis()}, "
+            f"Penerbit: {buku.get_penerbit()}, Tahun: {buku.get_tahun_terbit()}, Stok: {buku.get_stok()}"
+        )
+        judul = input("Judul Baru        : ").strip()
+        penulis = input("Penulis Baru      : ").strip()
+        penerbit = input("Penerbit Baru     : ").strip()
+
+        try:
+            tahun = int(input("Tahun Terbit Baru : ").strip())
+            stok = int(input("Stok Baru         : ").strip())
+        except ValueError:
+            print("Gagal! Tahun terbit dan stok harus berupa angka.")
+            return
+
+        if self.__manajer.perbarui_buku(kode, judul, penulis, penerbit, tahun, stok):
+            print("Data buku berhasil diperbarui.")
+        else:
+            print("Gagal memperbarui data buku.")
+
+    def menu_hapus(self):
+        print("\n--- HAPUS DATA BUKU ---")
+        kode = input("Masukkan Kode Buku yang akan dihapus: ").strip()
+        buku = self.__manajer.cari_buku(kode)
+
+        if buku is None:
+            print(f"Buku dengan kode '{kode.upper()}' tidak ditemukan.")
+            return
+
+        print(f"Buku ditemukan: [{buku.get_kode_buku()}] {buku.get_judul()} - {buku.get_penulis()}")
+        konfirmasi = input("Yakin ingin menghapus buku ini? (y/n): ").strip().lower()
+
+        if konfirmasi == "y":
+            if self.__manajer.hapus_buku(kode):
+                print("Data buku berhasil dihapus.")
+        else:
+            print("Penghapusan dibatalkan.")
