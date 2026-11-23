@@ -42,12 +42,4 @@ class Buku:
         self.__tahun_terbit = int(tahun_terbit)
         self.__stok = int(stok)
 
-    def to_dict(self):
-        return {
-            "kode_buku": self.__kode_buku,
-            "judul": self.__judul.replace(",", " "),
-            "penulis": self.__penulis.replace(",", " "),
-            "penerbit": self.__penerbit.replace(",", " "),
-            "tahun_terbit": self.__tahun_terbit,
-            "stok": self.__stok,
-        }
+
